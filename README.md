@@ -31,7 +31,11 @@ copy-template <template> <dst_path>
 ```bash
 pip install git+https://github.com/andrey4ik21pro1/copy-template.git
 ```
-2. **Run**:
+2. **Set author and repo**:
+```bash
+copy-template --author andrey4ik21pro1 --repo templates
+```
+3. **Run**:
 ```bash
 copy-template android-project android-project
 ```
