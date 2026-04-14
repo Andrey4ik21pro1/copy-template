@@ -29,7 +29,7 @@ copy-template <template> <dst_path>
 ## Usage
 1. **Install package:**
 ```bash
-pip install git+https://github.com/andrey4ik21pro1/copy-template.git
+pip install copy-template
 ```
 2. **Set author and repo**:
 ```bash
