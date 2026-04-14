@@ -6,18 +6,22 @@ from .utils import list_templates, copy_template
 
 data_path = os.path.join(os.path.dirname(__file__), "data.json")
 
-def load_data(filename):
-    if os.path.exists(filename):
-        with open(filename) as f:
-            data = json.load(f)
-    else:
-        data = {}
+class Config:
+    def __init__(self, filename):
+        self.filename = filename
 
-    return data
+    def load(self):
+        if os.path.exists(self.filename):
+            with open(self.filename) as f:
+                data = json.load(f)
+        else:
+            data = {}
 
-def save_data(data):
-    with open(data_path, "w") as f:
-        json.dump(data, f)
+        return data
+
+    def save(self, data):
+        with open(self.filename, "w") as f:
+            json.dump(data, f)
 
 def main():
     parser = argparse.ArgumentParser(
@@ -31,33 +35,38 @@ def main():
     parser.add_argument("dst_path", nargs="?", help="Destination path")
     args = parser.parse_args()
 
-    if not any(vars(args).values()):
-        parser.print_help()
-        return
+    config = Config(data_path)
+    data = config.load()
 
-    data = load_data(data_path)
-
-    if args.author:
-        data["author"] = args.author
-    if args.repo:
-        data["repo"] = args.repo
-
+    # config
     if args.author or args.repo:
-        save_data(data)
+        if args.author:
+            data["author"] = args.author
+        if args.repo:
+            data["repo"] = args.repo
+
+        config.save(data)
         saved = ", ".join(f"{k}={v}" for k, v in {"author": args.author, "repo": args.repo}.items() if v)
         print(f"saved: {saved}")
         return
 
-    if not data.get("author") or not data.get("repo"):
-        print("error: author/repo not set. use --author and --repo")
+    author, repo = data.get("author"), data.get("repo")
+    if not (author and repo):
+        parser.error("author/repo not set. use --author and --repo")
         return
 
+    # list
     if args.list:
-        templates = list_templates(data["author"], data["repo"])
+        templates = list_templates(author, repo)
         print("\n".join(templates))
         return
 
-    copy_template(data["author"], data["repo"], args.template, args.dst_path)
+    # template
+    if not args.template or not args.dst_path:
+        parser.print_help()
+        return
+
+    copy_template(author, repo, args.template, args.dst_path)
 
 if __name__ == "__main__":
     main()
