@@ -1,7 +1,7 @@
 
 # copy-template
 
-![License](https://img.shields.io/badge/License-GPL%20v3.0-blue?style=for-the-badge)  ![Python](https://img.shields.io/badge/Language-Python-3670A0?style=for-the-badge&logo=python&logoColor=white)  [![Copier](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/copier-org/copier/master/img/badge/badge-grayscale-inverted-border-orange.json&style=for-the-badge)](https://github.com/copier-org/copier)
+![License](https://img.shields.io/badge/License-GPL%20v3.0-blue?style=for-the-badge)  ![Python](https://img.shields.io/badge/Language-Python-3670A0?style=for-the-badge&logo=python&logoColor=white)  ![Copier](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/copier-org/copier/master/img/badge/badge-grayscale-inverted-border-orange.json&style=for-the-badge)
 
 ### Shortcut to Copier
 
