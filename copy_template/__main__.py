@@ -83,7 +83,7 @@ def main():
         data["templates"] = fresh_templates
         config.save(data)
 
-        print("✓ Templates successfully updated!")
+        print("Templates successfully updated!")
         return
 
     if not templates_dir.exists():
