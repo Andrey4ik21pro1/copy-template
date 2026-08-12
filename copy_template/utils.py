@@ -1,8 +1,8 @@
 import subprocess
 import shutil
-import sys
 from pathlib import Path
 from copier import run_copy
+from platformdirs import user_data_path
 
 def clone_repo(author: str, repo: str, dst_path: str) -> None:
     repo_url = f"https://github.com/{author}/{repo}.git"
@@ -18,25 +18,8 @@ def pull_repo(dst_path: str) -> None:
         check=True
     )
 
-def get_home_path() -> Path:
-    home = Path.home()
-
-    if sys.platform == "win32":
-        return home / "AppData" / "Local"
-
-    elif sys.platform == "linux":
-        return home / ".local" / "share"
-
-    elif sys.platform == "darwin":
-        return home / "Library" / "Application Support"
-
-    else:
-        raise OSError(f"Unsupported platform: {sys.platform}")
-
 def get_app_dir() -> Path:
-    path = get_home_path() / "copy-template"
-    path.mkdir(parents=True, exist_ok=True)
-    return path
+    return user_data_path(appname="copy-template", appauthor=False, ensure_exists=True)
 
 def list_templates(templates_dir: Path) -> list[str]:
     if not templates_dir.exists():

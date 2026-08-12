@@ -16,7 +16,8 @@ authors = [
     {name = "andrey4ik21pro1"}
 ]
 dependencies = [
-    "copier"
+    "copier",
+    "platformdirs"
 ]
 
 [project.urls]
